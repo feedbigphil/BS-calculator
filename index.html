@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Options Price Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <h1>Option Price Calculator</h1>
+    <h4>By Philippe Freisler</h4>
+    <div class="container">
+        <div id="calculator" class="box">
+            <h2>Black-Scholes Calculator</h2>
+            <form>
+                <label for="stockPrice">Stock price <b>($)</b></label><br>
+                <input type="text" id="stockPrice" name="stockPrice"><br>
+                <label for="strikePrice">Strike price <b>($)</b></label><br>
+                <input type="text" id="strikePrice" name="strikePrice"><br>
+                <label for="expiration">Expiration <b>(yrs)</b></label><br>
+                <input type="text" id="expiration" name="expiration"><br>
+                <label for="volatility">Volatility <b>(%)</b></label><br>
+                <input type="text" id="volatility" name="volatility"><br>
+                <label for="riskFree">Risk-free interest <b>(%)</b></label><br>
+                <input type="text" id="riskFree" name="riskFree"><br>
+                <button id="calculateButton" type="button">Calculate</button>
+            </form>
+            <div id="calculator-output">
+                <p id="callPrice"> <b>Call price:</b> </p>
+                <p id="putPrice"> <b>Put price:</b> </p>
+                <p id="delta"> <b>Delta:</b> </p>
+            </div>
+        </div>
+        <div id="dashboard" class="box">
+            <h2>Dashboard</h2>
+            <input type="text" id="tickerSymbol" placeholder="Search ticker symbol (eg. GOOG)"><br><br>
+            <button type="button" id="searchButton">Search</button>
+            <div class="stats-container">
+                <div class="stat">
+                    <p id="price">Previous close: </p>
+                    <p id="pe">PE ratio (TTM): </p>
+                    <p id="eps">EPS (TTM): </p>
+                    <p id="beta">Beta: </p>
+                    <p id="volume">Volume: </p>
+                </div>
+                <div class="stat">
+                    <p id="marketCap">Market cap: </p>
+                    <p id="ebitda">EBITDA: </p>
+                    <p id="pBook">Price/book (mrq): </p>
+                    <p id="pSales">Price/sales (ttm): </p>
+                    <p id="high">52-week high: </p>
+                </div>
+            </div>
+            <div id="stock-chart">
+                <!-- <h3>Chart of Stock</h3> -->
+                <canvas id="myChart"></canvas>
+                <!-- Placeholder for stock chart -->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="options" class="box">
+            <h2>Market depth</h2>
+            <label for="expirationSelect">Select expiration:</label>
+            <select id="expirationSelect"></select>
+            <div id="options-container" class="scrolable"></div>
+        </div>
+    </div>
+    <!-- Button to toggle the Black-Scholes explanation -->
+<button id="toggleBlackScholesExplanation">Explanation of Black-Scholes</button>
+
+<!-- Hidden section for Black-Scholes explanation -->
+<div class="container">
+<div id="blackScholesExplanation" style="display: none;">
+    <h3>Black-Scholes Model</h3>
+        
+        <p>
+            The Black-Scholes model, introduced in 1973 by Fischer Black and Myron Scholes, is a fundamental
+             tool in finance for valuing <u>European-style stock options</u> (only actionable at expiry). By considering factors like the current stock price,
+             option strike price, time until expiration, and volatility, the model calculates a theoretical price for options. 
+             This standardized approach revolutionized options pricing, enhancing market transparency, facilitating risk management 
+             strategies, and fostering financial innovation worldwide.
+        </p>
+        <p><b>The Black-Scholes formula:</b></p>
+        <div class="bs-model-container">
+            <div class="bs-image">
+                <img src="bs_formula.png" alt="Black-Scholes Model" class="bs_formula">
+            </div>
+            <ul class="bs-explanations">
+                <li><b>C</b>: Call option price</li>
+                <li><b>S</b>: Current stock price</li>
+                <li><b>K</b>: Strike price</li>
+                <li><b>t</b>: Time to expiration</li>
+                <li><b>σ</b>: Volatility</li>
+                <li><b>r</b>: Risk-free interest rate</li>
+                <li><b>N</b>: Cumulative distribution function of the standard normal distribution</li>
+                <li><b>d1</b>: "delta" sensitivity of an option's price to changes in the price of the underlying asset</li>
+                <li><b>d2</b>: Rate of change in an option's price relative to changes in the price of the underlying asset</li>
+            </ul>
+        </div>
+        <p>
+            
+              It is used to calculate a "fair" price (where probability of profit and loss are equal),
+             by subtracting the <b>net present value (NPV)</b> of 
+              the strike price multiplied by the cumulative standard normal 
+              distribution from the product of the stock price and the cumulative
+               standard normal probability distribution function. 
+               
+               The model prices options by assuming the underlying
+             asset follows geometric Brownian motion, where its price changes
+              randomly with a drift (expected return) and volatility.
+        </p>
+</div>
+</div>
+    <div id="ai-volatility" class="box">
+        <h2>AI Volatility Prediction coming soon...</h2>
+        <!-- Placeholder for AI volatility prediction -->
+    </div>
+    <script  src="script.js"></script>
+</body>
+</html>
