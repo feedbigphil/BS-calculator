@@ -1,3 +1,5 @@
+let myChart = null;
+
 // Function to calculate the Black-Scholes Call and Put option prices
 function calculateBlackScholes(stockPrice, strikePrice, expiration, volatility, riskFree) {
     const S = parseFloat(stockPrice);
@@ -244,10 +246,16 @@ function updateChart(history) {
         return;
     }
     const ctx = document.getElementById('myChart').getContext('2d');
+
+    // Destroy existing chart instance if it exists
+    if (myChart) {
+        myChart.destroy();
+    }
+    
     const timestamps = history.timestamp.map(ts => new Date(ts)); // Assuming history.timestamp contains string dates
     const closePrices = history.close;
 
-    new Chart(ctx, {
+    myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: timestamps,
