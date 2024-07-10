@@ -77,4 +77,4 @@ def get_stock_options(ticker):
         return jsonify({'error': f"Failed to fetch options data for {ticker}"}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8080)
