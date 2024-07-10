@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 app = Flask(__name__)
-CORS(app, origins=["https://feedbigphil.github.io"])  # Enable Cross-Origin Resource Sharing
+CORS(app)  # Enable Cross-Origin Resource Sharing
 
 @app.route('/api/stock-data/<ticker>', methods=['GET'])
 def get_stock_data(ticker):
