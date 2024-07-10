@@ -1,4 +1,5 @@
 let myChart = null;
+const baseUrl = 'https://bscalculator-428906.ts.r.appspot.com';
 
 // Function to calculate the Black-Scholes Call and Put option prices
 function calculateBlackScholes(stockPrice, strikePrice, expiration, volatility, riskFree) {
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 async function fetchStockOptions(ticker) {
     try {
-        const response = await fetch(`http://127.0.0.1:5000/api/stock-options/${ticker}`);
+        const response = await fetch(`${baseUrl}/stock-options/${ticker}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -200,7 +201,7 @@ function renderOptionsForExpiration(expirationData) {
 }
 async function fetchStockData(ticker) {
     try {
-        const response = await fetch(`http://127.0.0.1:5000/api/stock-data/${ticker}`);
+        const response = await fetch(`${baseUrl}/stock-data/${ticker}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -214,7 +215,7 @@ async function fetchStockData(ticker) {
 
 async function fetchStockHistory(ticker) {
     try {
-        const response = await fetch(`http://127.0.0.1:5000/api/stock-history/${ticker}`);
+        const response = await fetch(`${baseUrl}/api/stock-history/${ticker}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
